@@ -2,6 +2,7 @@
   @mixin clearfix {
   }
 
+  /* #IMPORTANT ROW GUTTERS ES UNA CLASE QUE DA GAP A LAS COLUMNAS */
   /* Como quitar el padding del ultimo child de row */
   &--gutters {
     margin-right: -65px;
@@ -10,6 +11,15 @@
   /* Seleccionamos todos los div children de gutters */
   &--gutters > div {
     padding-right: 65px;
+  }
+
+  /* GUTTERS PERO MAS GRANDE */
+  &--gutters-large {
+    margin-right: -100px;
+  }
+
+  &--gutters-large > div {
+    padding-right: 100px;
   }
 
   &__b-margin-until-medium {
@@ -28,6 +38,11 @@
     }
     &__medium-4--larger {
       width: 37%;
+    }
+
+    &__medium-6 {
+      float: left;
+      width: 50%;
     }
 
     &__medium-8 {

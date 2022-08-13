@@ -1,0 +1,31 @@
+.section-title {
+  font-size: 2.55rem;
+  font-weight: 300;
+  text-align: center;
+
+  @mixin atSmall {
+    font-size: 3.75rem;
+  }
+
+  strong {
+    font-weight: 500;
+  }
+
+  &__icon {
+    /* Colocar la estrella encima del texto, hacemos que sea un bloque*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.6rem;
+
+    @mixin atSmall {
+      /* A partir de Small queremos que la estrella este al lado del title
+        ------> asique cambiamos el display:block a inline-block
+      */
+      margin-right: 0.5rem;
+      margin-left: 0;
+      margin-bottom: 0;
+      display: inline-block;
+    }
+  }
+}
