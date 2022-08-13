@@ -26,6 +26,9 @@
     margin-bottom: 1rem;
   }
 
+  /* CUANDO LA SCREEN SEA MEDIANA O > === HACEMOS SE APLICAN LOS ESTILOS DE
+    LAS COLUMNAS
+  */
   @mixin atMedium {
     /* Quitamos el margin de la clase, que solo se debe aplicar a pantallas pequeñas */
     &__b-margin-until-medium {
