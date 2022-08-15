@@ -11,6 +11,10 @@
     font-weight: 500;
   }
 
+  &--blue {
+    color: $mainBlue;
+  }
+
   &__icon {
     /* Colocar la estrella encima del texto, hacemos que sea un bloque*/
     display: block;
@@ -19,6 +23,9 @@
     margin-bottom: 0.6rem;
 
     @mixin atSmall {
+      position: relative; /* Poner el icono centrado a la titulo */
+      top: 8px;
+
       /* A partir de Small queremos que la estrella este al lado del title
         ------> asique cambiamos el display:block a inline-block
       */

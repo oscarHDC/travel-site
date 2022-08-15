@@ -1,12 +1,43 @@
+/* ESTA CLASE DA PADDING A CASA SECCION */
 .page-section {
   padding: 1.2rem 0;
 
   @mixin atMedium {
     padding: 4.5rem;
   }
-}
 
-.page-section--blue {
-  background-color: $mainBlue;
-  color: #fff;
+  &--no-b-padding-until-medium {
+    /* Quitamos el padding bottom para que quede bonito
+      en pantallas pequeñas
+    */
+    padding-bottom: 0;
+
+    @mixin atMedium {
+      /* Devolvemos el padding para q haya espacio en 
+      pantallas mas grandes */
+      padding-bottom: 4.5rem;
+    }
+  }
+
+  &--no-b-padding-until-large {
+    padding-bottom: 0;
+
+    @mixin atLarge {
+      padding-bottom: 4.5rem;
+    }
+  }
+
+  &--blue {
+    background-color: $mainBlue;
+    color: #fff;
+  }
+
+  &--testimonials {
+    background-color: #e0e6ef;
+    @mixin atLarge {
+      background: url(/app/assets/images/testimonials-bg.jpg) top center
+        no-repeat;
+      background-size: cover;
+    }
+  }
 }
