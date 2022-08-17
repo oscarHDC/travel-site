@@ -1,0 +1,145 @@
+.site-header {
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  z-index: 2; /* header esta x encima de la imagen, si se posiciona absolut
+  hay que establecer el z index para que no se que por debajo de la foto
+  */
+  transition: background-color 0.3s ease-out;
+
+  &--is-expanded {
+    background-color: rgba($mainBlue, 0.55);
+  }
+
+  @mixin atMedium {
+    background-color: rgba($mainBlue, 0.3);
+  }
+
+  &__btn-container {
+    @mixin atMedium {
+    }
+  }
+
+  &__logo {
+    position: absolute; /* Para que este fuera del flow del site-header( 
+      de esta manear el logo no marca la altura del site-header) */
+    top: 0; /* top: 0, para que no le afecte el padding del site-header class */
+    background-color: $mainBlue;
+    padding: 13px 29px;
+
+    /* CEntramos el  logo en mitad de la pantalla en moviles y small */
+    left: 50%;
+    transform: translateX(-50%);
+
+    @mixin atMedium {
+      /* Hacemos que el logo no este centrado a partir de medium */
+      left: auto;
+      transform: translateX(0);
+      padding: 25px 36px;
+    }
+  }
+
+  &__menu-icon {
+    width: 20px;
+    height: 19px;
+
+    position: absolute;
+    z-index: 10; /* Para que pueda ser pulsado. Ya que el menu desplegado tenia un index mayor que no permitia cerrar el menu */
+    top: 10px;
+    right: 10px;
+    transition: transform 0.3s ease-out;
+
+    /* Creando el icono. Para ahorrar divs en el html usamos after y before */
+    &__middle {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transition: all 0.3s ease-out;
+      transform-origin: 0 50%;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transform-origin: 0 0;
+      transition: transform 0.3s ease-out;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transform-origin: 0 100%;
+      transition: transform 0.3s ease-out;
+    }
+
+    @mixin atMedium {
+      display: none;
+    }
+
+    &--close-x {
+      &::before {
+        transform: rotate(45deg) scaleX(1.25);
+      }
+
+      &::after {
+        transform: rotate(-45deg) scaleX(1.25) translateY(1px);
+      }
+
+      .site-header__menu-icon__middle {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+    }
+  }
+
+  &__menu-content {
+    /* En vez de usar display none y block, ocultamos el menu con opacity 0.
+      Despues usamos z-index para ponerlo por debajo de los demas elementos y de esta manera no pueda ser clickado accidentalmente. RELATIVE se utiliza pq sino z-index no seria tenido en cuenta por el navegador*/
+    opacity: 0;
+    transform: scale(
+      1.2
+    ); /* Transicion para qie aparezca mas grande el menu y se haga mas pequeño al final. Su valor inicial es 1, asiq 1.2 es mas grande */
+    transition: all 0.3s ease-out;
+    position: relative;
+    z-index: -10;
+    padding-top: 90px;
+    text-align: center;
+
+    @mixin atMedium {
+      /* Colocando el nav */
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      .site-header__btn-container {
+        /* Colocar al boton el ultimo en la fila */
+        order: 2;
+      }
+
+      opacity: 1;
+      z-index: 1; /* Devolvemos el zindex a 1 (antes estaba en -10) para que los botones puedan ser pulsados */
+      transform: scale(1); /* Devolvemos el scale a 1 */
+      padding-top: 0;
+    }
+
+    /* Clase desplegar menu */
+    &--is-visible {
+      opacity: 1;
+      z-index: 1; /* Devolvemos el zindex a 1 (antes estaba en -10) para que los botones puedan ser pulsados */
+      transform: scale(
+        1
+      ); /* Cuando termine la transicion el scale sera su vlor inicial(1). #IMPORTANT TRANSICION */
+    }
+  }
+}
