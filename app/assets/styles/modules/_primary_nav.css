@@ -41,6 +41,10 @@
       padding: 12px 0;
       font-size: 1rem;
       background-color: transparent; /* Ocultar el background de cuando el menu esta desplegado */
+
+      &.is-current-link {
+        color: #fabb69;
+      }
     }
   }
 }
