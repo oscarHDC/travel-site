@@ -348,6 +348,10 @@ template {
   display: none;
 }
 
+$mainBlue: #2f5572;
+
+$mainOrange: #d59541;
+
 @define-mixin atSmall {
   @media (min-width: 530px) {
     @mixin-content;
@@ -361,33 +365,56 @@ template {
 }
 
 @define-mixin atLarge {
-  @media (min-width: 1200px) {
+  @media (min-width: 1010px) {
     @mixin-content;
   }
 }
 
-$mainBlue: #2f5572;
+* {
+  box-sizing: border-box;
+}
 
-$mainOrange: #d59541;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: $mainOrange;
+}
 
 .large-hero {
   border-bottom: 10px solid $mainBlue;
-  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
 
-  .large-hero__image {
-    display: block;
+  &__image {
+    grid-column: 1;
+    grid-row: 1;
+    img {
+      display: block;
+    }
   }
 
-  .large-hero__text-content {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 100%;
+  &__text-content {
+    align-self: center;
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 60px;
+
     text-align: center;
   }
 
-  .large-hero__title {
+  &__title {
     font-weight: 300;
     color: $mainBlue;
     margin: 0;
@@ -399,7 +426,7 @@ $mainOrange: #d59541;
     }
   }
 
-  .large-hero__subtitle {
+  &__subtitle {
     font-weight: 300;
     color: $mainBlue;
     font-size: 1.5rem;
@@ -410,7 +437,7 @@ $mainOrange: #d59541;
     }
   }
 
-  .large-hero__description {
+  &__description {
     color: #fff;
     font-size: 1.1rem;
     font-weight: 100;
@@ -425,19 +452,6 @@ $mainOrange: #d59541;
       font-size: 1.875rem;
     }
   }
-}
-
-html {
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  color: #333;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
 }
 
 .btn {
@@ -460,55 +474,704 @@ img {
   }
 }
 
+/* CONTAINER  */
+
 .wrapper {
+  overflow: hidden;
   padding-left: 18px;
   padding-right: 18px;
-  max-width: 1200px;
+  max-width: 1236px;
   margin-left: auto;
   margin-right: auto;
+
+  &--medium {
+    max-width: 976px;
+  }
+
+  &--narrow {
+    max-width: 470px;
+  }
+
+  &--no-padding-until-medium {
+    padding-left: 0;
+    padding-right: 0;
+
+    @mixin atMedium {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+
+  &--no-padding-until-large {
+    padding-left: 0;
+    padding-right: 0;
+
+    @mixin atLarge {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+
+  .wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &--b-margin {
+    margin-bottom: 1rem;
+    @mixin atSmall {
+      margin-bottom: 3.875rem;
+    }
+  }
 }
+
+/* ESTA CLASE DA PADDING A CASA SECCION */
 
 .page-section {
-  padding: 4.5rem 0;
-}
+  padding: 1.2rem 0;
 
-.page-section--blue {
-  background-color: $mainBlue;
-  color: #fff;
+  @mixin atMedium {
+    padding: 4.5rem;
+  }
+
+  &--no-b-padding-until-medium {
+    /* Quitamos el padding bottom para que quede bonito
+      en pantallas pequeñas
+    */
+    padding-bottom: 0;
+
+    @mixin atMedium {
+      /* Devolvemos el padding para q haya espacio en 
+      pantallas mas grandes */
+      padding-bottom: 4.5rem;
+    }
+  }
+
+  &--no-b-padding-until-large {
+    padding-bottom: 0;
+
+    @mixin atLarge {
+      padding-bottom: 4.5rem;
+    }
+  }
+
+  &--blue {
+    background-color: $mainBlue;
+    color: #fff;
+  }
+
+  &--testimonials {
+    background-color: #e0e6ef;
+    @mixin atLarge {
+      background: url(/app/assets/images/testimonials-bg.jpg) top center
+        no-repeat;
+      background-size: cover;
+    }
+  }
 }
 
 .headline {
   font-weight: 300;
-  font-size: 2.875rem;
+  font-size: 1.9rem;
   color: $mainBlue;
+
+  @mixin atSmall {
+    font-size: 2.875rem;
+  }
 
   &--centered {
     text-align: center;
   }
+
+  &--orange {
+    color: $mainOrange;
+  }
+
+  &--small {
+    font-size: 1.2rem;
+
+    @mixin atSmall {
+      font-size: 1.875rem;
+    }
+  }
+
+  &--narrow {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &--light {
+    font-weight: 100;
+  }
+
+  &--b-margin-small {
+    margin-bottom: 0.5em;
+  }
+
+  &--b-margin-large {
+    margin-bottom: 1.6em;
+  }
+
+  &--no-t-margin {
+    margin-top: 0;
+  }
 }
 
-.headline--orange {
-  color: $mainOrange;
+.row {
+  &--t-padding {
+    padding-top: 80px;
+  }
+
+  &__b-margin-until-medium {
+    margin-bottom: 1rem;
+  }
+
+  /* CUANDO LA SCREEN SEA MEDIANA O > === HACEMOS SE APLICAN LOS ESTILOS DE
+    LAS COLUMNAS
+  */
+  @mixin atMedium {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+
+    &--gutters {
+      column-gap: 5.3%;
+    }
+
+    /* GUTTERS PERO MAS GRANDE */
+    &--gutters-large {
+      column-gap: 8%;
+    }
+
+    &--gutters-small {
+      column-gap: 3.6%;
+    }
+
+    &__large-1,
+    &__large-2,
+    &__large-3,
+    &__large-4,
+    &__large-5,
+    &__large-6,
+    &__large-7,
+    &__large-8,
+    &__large-9,
+    &__large-10,
+    &__large-11,
+    &__large-12 {
+      grid-column: span 12;
+    }
+
+    /* Quitamos el margin de la clase, que solo se debe aplicar a pantallas pequeñas */
+    &__b-margin-until-medium {
+      margin-bottom: 0;
+    }
+
+    &__medium-4 {
+      grid-column: span 4;
+    }
+
+    &__medium-6 {
+      grid-column: span 6;
+    }
+
+    &__medium-8 {
+      grid-column: span 8;
+    }
+  }
+
+  @mixin atLarge {
+    &__b-margin-until-large {
+      margin-bottom: 0;
+    }
+
+    &__large-4 {
+      grid-column: span 4;
+    }
+
+    &__large-6 {
+      grid-column: span 6;
+    }
+
+    &__large-8 {
+      grid-column: span 8;
+    }
+  }
+
+  /* BEGIN EQUAL HEIGHT RULES */
+
+  &--equal-height-at-medium {
+    /* hacemos que los testimonails tengan = altura */
+    @mixin atMedium {
+      & > div {
+        display: flex;
+      }
+    }
+  }
+
+  &--equal-height-at-large {
+    /* hacemos que los testimonails tengan = altura */
+    @mixin atLarge {
+      & > div {
+        display: flex;
+      }
+    }
+  }
 }
 
-.headline--small {
-  font-size: 1.875rem;
+.generic-content-container {
+  p {
+    font-weight: 300;
+    line-height: 1.65;
+
+    margin: 0 0 1.8rem 0;
+
+    @mixin atSmall {
+      font-size: 1.125rem;
+    }
+  }
+
+  p a {
+    font-weight: 700;
+  }
 }
 
-.headline--narrow {
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+.section-title {
+  font-size: 2.55rem;
+  font-weight: 300;
+  text-align: center;
+
+  @mixin atSmall {
+    font-size: 3.75rem;
+  }
+
+  strong {
+    font-weight: 500;
+  }
+
+  &--blue {
+    color: $mainBlue;
+  }
+
+  &--less-margin {
+    margin-bottom: 1.3rem;
+    margin-top: 0;
+  }
+
+  &__icon {
+    /* Colocar la estrella encima del texto, hacemos que sea un bloque*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.6rem;
+
+    @mixin atSmall {
+      position: relative; /* Poner el icono centrado a la titulo */
+      top: 8px;
+
+      /* A partir de Small queremos que la estrella este al lado del title
+        ------> asique cambiamos el display:block a inline-block
+      */
+      margin-right: 0.5rem;
+      margin-left: 0;
+      margin-bottom: 0;
+      display: inline-block;
+    }
+  }
 }
 
-.headline--light {
-  font-weight: 100;
+.feature-item {
+  position: relative;
+  padding-bottom: 2.5rem;
+
+  @mixin atSmall {
+    /* Este padding es para darle espacio al icono(aplicando el padding al texto), ya que esta
+      posicionado absolut
+    */
+    padding-left: 94px;
+  }
+
+  &__icon {
+    /* En pantallas pequeñas tiene su propia linea, y esta centrado */
+    display: block;
+    margin: 0 auto;
+
+    @mixin atSmall {
+      /* En pantallas grandes se coloca a la izq del texto */
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  &__title {
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+    margin-top: 0.7em;
+    text-align: center; /* Alineamos texto en pantallas pequeñas */
+
+    @mixin atSmall {
+      text-align: left; /* Alineamos texto a la izq en las demas dimensiones */
+      margin-top: 1em;
+      font-size: 1.875rem;
+    }
+  }
 }
 
-.headline--b-margin-small {
-  margin-bottom: 0.5em;
+.testimonial {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0 18px 1px 18px;
+  margin-bottom: 98px;
+
+  @mixin atLarge {
+    padding: 0 1.8125rem 1px 1.8125rem;
+    margin-bottom: 0;
+  }
+
+  &--last {
+    margin-bottom: 0;
+  }
+
+  &__photo {
+    border-radius: 50%;
+    overflow: hidden; /* Con esto no hace falta seleccionor la img del div para 
+      poner la img redonda
+    */
+    width: 160px; /* damos dimensiones al div que contiene la img para hacer el border radius*/
+    height: 160px;
+    margin: 0 auto -80px auto; /* Centramos la img,
+
+    #IMPORTANT -80px -> LA img esta posicionanda relative para ponerla sobresaliendo del div. Esta top: -80px pq es la mitad de su altura,
+    asique para posicionar el texto debajo suyo, pq sino se queda abajo lejos,
+    ponemos -80px
+    
+    */
+
+    position: relative;
+    top: -80px;
+
+    border: 6px solid rgba(255, 255, 255, 0.8);
+  }
+
+  &__title {
+    color: $mainBlue;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+  }
+  &__subtitle {
+    color: $mainOrange;
+    text-align: center;
+    font-weight: 400;
+    font-size: 0.9375rem;
+    margin: 0.25rem 0 1rem 0;
+  }
 }
 
-.headline--b-margin-large {
-  margin-bottom: 1.6em;
+.site-footer {
+  background-color: $mainBlue;
+  color: #fff;
+  padding: 0.5rem;
+  text-align: center;
+
+  &__text {
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 200;
+
+    @mixin atMedium {
+      display: inline-block;
+      margin-bottom: 0;
+      margin-right: 1.4rem;
+    }
+  }
+}
+
+/* background-color: rgba(47, 85, 114, .3); */
+
+.site-header {
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  z-index: 2; /* header esta x encima de la imagen, si se posiciona absolut
+  hay que establecer el z index para que no se que por debajo de la foto
+  */
+  transition: background-color 0.3s ease-out;
+
+  &--is-expanded {
+    background-color: rgba($mainBlue, 0.55);
+  }
+
+  @mixin atMedium {
+    position: fixed;
+    background-color: rgba($mainBlue, 0.3);
+
+    &--dark {
+      /* Scroll */
+      background-color: rgba(23, 51, 72, 0.85);
+    }
+  }
+
+  &__btn-container {
+    @mixin atMedium {
+    }
+  }
+
+  &__logo {
+    position: absolute; /* Para que este fuera del flow del site-header( 
+      de esta manear el logo no marca la altura del site-header) */
+    top: 0; /* top: 0, para que no le afecte el padding del site-header class */
+    background-color: $mainBlue;
+    padding: 13px 29px;
+
+    /* CEntramos el  logo en mitad de la pantalla en moviles y small */
+    left: 50%;
+    transform: translateX(-50%);
+    transform-origin: 50% 0;
+
+    transition: transform 0.3s ease-out;
+
+    @mixin atMedium {
+      padding: 25px 36px;
+      /* Hacemos que el logo no este centrado a partir de medium */
+      left: auto;
+      transform: translateX(0);
+
+      .site-header--dark & {
+        /* El & nos da el selector de logo */
+        transform: scale(
+          0.54
+        ); /* Cuando haya aplicado el dark mode del sccroll
+          hacemos que el logo sea de la altura del nav
+        */
+      }
+    }
+  }
+
+  &__menu-icon {
+    width: 20px;
+    height: 19px;
+
+    position: absolute;
+    z-index: 10; /* Para que pueda ser pulsado. Ya que el menu desplegado tenia un index mayor que no permitia cerrar el menu */
+    top: 10px;
+    right: 10px;
+    transition: transform 0.3s ease-out;
+
+    /* Creando el icono. Para ahorrar divs en el html usamos after y before */
+    &__middle {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transition: all 0.3s ease-out;
+      transform-origin: 0 50%;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transform-origin: 0 0;
+      transition: transform 0.3s ease-out;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transform-origin: 0 100%;
+      transition: transform 0.3s ease-out;
+    }
+
+    @mixin atMedium {
+      display: none;
+    }
+
+    &--close-x {
+      &::before {
+        transform: rotate(45deg) scaleX(1.25);
+      }
+
+      &::after {
+        transform: rotate(-45deg) scaleX(1.25) translateY(1px);
+      }
+
+      .site-header__menu-icon__middle {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+    }
+  }
+
+  &__menu-content {
+    /* En vez de usar display none y block, ocultamos el menu con opacity 0.
+      Despues usamos z-index para ponerlo por debajo de los demas elementos y de esta manera no pueda ser clickado accidentalmente. RELATIVE se utiliza pq sino z-index no seria tenido en cuenta por el navegador*/
+    opacity: 0;
+    transform: scale(
+      1.2
+    ); /* Transicion para qie aparezca mas grande el menu y se haga mas pequeño al final. Su valor inicial es 1, asiq 1.2 es mas grande */
+    transition: all 0.3s ease-out;
+    position: relative;
+    z-index: -10;
+    padding-top: 90px;
+    text-align: center;
+
+    @mixin atMedium {
+      /* Colocando el nav */
+      display: flex;
+      justify-content: flex-end;
+
+      gap: 1rem;
+      .site-header__btn-container {
+        /* Colocar al boton el ultimo en la fila */
+        order: 2;
+      }
+
+      opacity: 1;
+      z-index: 1; /* Devolvemos el zindex a 1 (antes estaba en -10) para que los botones puedan ser pulsados */
+      transform: scale(1); /* Devolvemos el scale a 1 */
+      padding-top: 0;
+    }
+
+    /* Clase desplegar menu */
+    &--is-visible {
+      opacity: 1;
+      z-index: 1; /* Devolvemos el zindex a 1 (antes estaba en -10) para que los botones puedan ser pulsados */
+      transform: scale(
+        1
+      ); /* Cuando termine la transicion el scale sera su vlor inicial(1). #IMPORTANT TRANSICION */
+    }
+  }
+}
+
+.primary-nav {
+  padding-top: 10px;
+
+  @mixin atMedium {
+    padding-top: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    display: inline-block;
+    padding-right: 7px;
+
+    @mixin atMedium {
+      padding-right: 20px;
+    }
+  }
+
+  li:last-child {
+    padding-right: 0;
+    @mixin atMedium {
+      padding-right: 20px;
+    }
+  }
+
+  a {
+    /* Estilos de cuando el menu esta desolegado */
+    color: #fff;
+    font-weight: 300;
+    text-decoration: none;
+    display: block;
+    padding: 5px 8px;
+    font-size: 0.8rem;
+    background-color: rgba($mainBlue, 0.5);
+
+    @mixin atMedium {
+      padding: 12px 0;
+      font-size: 1rem;
+      background-color: transparent; /* Ocultar el background de cuando el menu esta desplegado */
+
+      &.is-current-link {
+        color: #fabb69;
+      }
+    }
+  }
+}
+
+.reveal-item {
+  opacity: 0;
+  transition: opacity 0.3s ease-out, transform 1.2s ease-out;
+  transform: scale(1.5);
+  &--is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 5;
+
+  display: flex;
+
+  &__inner {
+    /* Centrar  */
+    flex: 1; /* Flex grow -> 1, para que el */
+    margin: auto;
+  }
+
+  &__description {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  &__close {
+    /* Posicionar button */
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 2rem;
+    transform: scale(1.2);
+    transform-origin: 100% 0;
+    cursor: pointer;
+    color: $mainBlue;
+
+    &:hover {
+      color: $mainOrange;
+    }
+  }
+}
+
+.social-icons {
+  text-align: center;
+  background-color: cadetblue;
+
+  &__icon {
+    background-color: $mainOrange;
+    display: inline-block;
+    height: 72px;
+    width: 72px;
+    margin: 0 5px 5px 5px;
+
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+  }
 }
