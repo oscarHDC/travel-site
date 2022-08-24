@@ -2,6 +2,7 @@ import "../styles/styles.css";
 import "lazysizes";
 import MobileMenu from "./modules/MobileMenu.js";
 import RevealOnScroll from "./modules/RevealOnScroll";
+
 import StickyHeader from "./modules/StickyHeader";
 
 new StickyHeader();

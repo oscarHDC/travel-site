@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "css-minimizer-webpack-plugin": "^4.0.0",
     "lazysizes": "^5.3.2",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1"
@@ -9,7 +10,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve",
-    "postcss": "postcss ./app/assets/styles/styles.css --output  ./app/assets/styles/dist/main.css"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,16 @@
   },
   "homepage": "https://github.com/oscarHDC/travel-site#readme",
   "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
     "autoprefixer": "^10.4.8",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
+    "fs-extra": "^10.1.0",
+    "html-webpack-plugin": "^5.5.0",
     "i": "^0.3.7",
+    "mini-css-extract-plugin": "^2.6.1",
     "postcss": "^8.4.14",
     "postcss-cli": "^10.0.0",
     "postcss-hexrgba": "^2.1.0",
