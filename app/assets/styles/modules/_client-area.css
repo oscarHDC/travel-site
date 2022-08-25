@@ -1,0 +1,15 @@
+.client-area {
+  padding: 30px;
+
+  &__form {
+    display: flex;
+  }
+
+  &__input {
+    flex: 1; /* FLEX GROW: 1  ----> Para que ocupe todo el spacio disponible */
+  }
+
+  &__error {
+    color: red;
+  }
+}
